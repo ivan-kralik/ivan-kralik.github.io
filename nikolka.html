@@ -11,8 +11,9 @@
 </style>
 
 <body>
+	<span id="lol"></span>
 	<p>Sfúkni sviečku</p>
-	<img src="torta.svg">
+	<a href="nikolka-2.html"><img src="torta.svg"></a>
 	<script src="volume-meter.js"></script>
 	<script>
 		
@@ -66,6 +67,7 @@
 				window.location.href='nikolka-2.html';
 			}
 		    
+		    document.getElementById('lol').innerHTML = meter.volume;
 		    rafID = window.requestAnimationFrame( onLevelChange );
 		}
 	</script>
