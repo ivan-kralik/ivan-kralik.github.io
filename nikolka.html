@@ -35,7 +35,7 @@
 		            "audio": {
 		                "mandatory": {
 		                    "googEchoCancellation": "false",
-		                    "googAutoGainControl": "false",
+		                    "googAutoGainControl": "true",
 		                    "googNoiseSuppression": "false",
 		                    "googHighpassFilter": "false"
 		                },
@@ -63,7 +63,7 @@
 		}
 		
 		function onLevelChange( time ) {
-		    if (meter.volume >= 0.6) {
+		    if (meter.volume >= 0.5) {
 				window.location.href='nikolka-2.html';
 			}
 		    
