@@ -6,71 +6,13 @@
 
 <style>
 	html { height: 100%; }
-	body { text-align: center; height: 90%; background: #1E90FF; font-family: sans-serif; font-size: 5vh; color: #002346; }
+	body { text-align: center; height: 90%; background: #1E90FF; font-family: sans-serif; font-size: 5vh; color: #002346; line-height: 100vh; }
 	img { max-width: 90%; max-height: 80%; padding-top: 2%; }
+	.button { text-decoration: none; color: white; background: #002346; padding: 0.3em 1em; border-radius: 0.4em; }
 </style>
 
 <body>
-	<span id="lol"></span>
-	<p>Sfúkni sviečku</p>
-	<a href="nikolka-2.html"><img src="torta.svg"></a>
-	<script src="volume-meter.js"></script>
-	<script>
-		
-		var audioContext = null;
-		var meter = null;
-		var canvasContext = null;
-		var WIDTH=500;
-		var HEIGHT=50;
-		var rafID = null;
-		
-		window.onload = function() {
-		    window.AudioContext = window.AudioContext || window.webkitAudioContext;
-		    audioContext = new AudioContext();
-		    
-		    try {
-		        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-		        navigator.getUserMedia(
-		        {
-		            "audio": {
-		                "mandatory": {
-		                    "googEchoCancellation": "false",
-		                    "googAutoGainControl": "true",
-		                    "googNoiseSuppression": "false",
-		                    "googHighpassFilter": "false"
-		                },
-		                "optional": []
-		            },
-		        }, onMicrophoneGranted, onMicrophoneDenied);
-		    } catch (e) {
-		        alert('getUserMedia threw exception :' + e);
-		    }
-		
-		}
-		
-		function onMicrophoneDenied() {
-		    alert('Bez mikrofónu sa nedá sfúknuť sviečka :(');
-		}
-		
-		var mediaStreamSource = null;
-		
-		function onMicrophoneGranted(stream) {
-		    mediaStreamSource = audioContext.createMediaStreamSource(stream);
-		    meter = createAudioMeter(audioContext);
-		    mediaStreamSource.connect(meter);
-		    
-		    onLevelChange();
-		}
-		
-		function onLevelChange( time ) {
-		    if (meter.volume >= 0.3) {
-				window.location.href='nikolka-2.html';
-			}
-		    
-		    document.getElementById('lol').innerHTML = meter.volume;
-		    rafID = window.requestAnimationFrame( onLevelChange );
-		}
-	</script>
+	<a href="nikolka-2.html" class="button">Prekvapenie</a>
 </body>
 
 </html>
