@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+	<title>Všetko najlepšie k narodeninám</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+
+<style>
+	html { height: 100%; }
+	body { text-align: center; height: 90%; background: #1E90FF; font-family: sans-serif; font-size: 5vh; color: #002346; }
+	img { max-width: 90%; max-height: 80%; padding-top: 2%; }
+</style>
+
+<body>
+	<p>Sfúkni sviečku</p>
+	<img src="torta.svg">
+	<script src="volume-meter.js"></script>
+	<script>
+		
+		var audioContext = null;
+		var meter = null;
+		var canvasContext = null;
+		var WIDTH=500;
+		var HEIGHT=50;
+		var rafID = null;
+		
+		window.onload = function() {
+		    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+		    audioContext = new AudioContext();
+		    
+		    try {
+		        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+		        navigator.getUserMedia(
+		        {
+		            "audio": {
+		                "mandatory": {
+		                    "googEchoCancellation": "false",
+		                    "googAutoGainControl": "false",
+		                    "googNoiseSuppression": "false",
+		                    "googHighpassFilter": "false"
+		                },
+		                "optional": []
+		            },
+		        }, onMicrophoneGranted, onMicrophoneDenied);
+		    } catch (e) {
+		        alert('getUserMedia threw exception :' + e);
+		    }
+		
+		}
+		
+		function onMicrophoneDenied() {
+		    alert('Bez mikrofónu sa nedá sfúknuť sviečka :(');
+		}
+		
+		var mediaStreamSource = null;
+		
+		function onMicrophoneGranted(stream) {
+		    mediaStreamSource = audioContext.createMediaStreamSource(stream);
+		    meter = createAudioMeter(audioContext);
+		    mediaStreamSource.connect(meter);
+		    
+		    onLevelChange();
+		}
+		
+		function onLevelChange( time ) {
+		    if (meter.volume >= 0.9) {
+				window.location.href='nikolka-2.html';
+			}
+		    
+		    rafID = window.requestAnimationFrame( onLevelChange );
+		}
+	</script>
+</body>
+
+</html>
